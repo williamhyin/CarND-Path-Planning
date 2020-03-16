@@ -1,9 +1,15 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program Project
-   
+
 ![](https://i.imgur.com/ew1YZaG.png)
 
+If you want to learn more, please refer to my documentation:
+
+1. Path Planning-Highway Driving project.md
+2. Path Planning-search.md
+
 ### Goals
+
 In this project your goal is to safely navigate around a virtual highway with other traffic that is driving +-10 MPH of the 50 MPH speed limit. You will be provided the car's localization and sensor fusion data, there is also a sparse map list of waypoints around the highway. The car should try to go as close as possible to the 50 MPH speed limit, which means passing slower traffic when possible, note that other cars will try to change lanes too. The car should avoid hitting other cars at all cost as well as driving inside of the marked road lanes at all times, unless going from one lane to another. The car should be able to make one complete loop around the 6946m highway. Since the car is trying to go 50 MPH, it should take a little over 5 minutes to complete 1 loop. Also the car should not experience total acceleration over 10 m/s^2 and jerk that is greater than 10 m/s^3.
 
 #### The map of the highway is in data/highway_map.txt
@@ -68,6 +74,7 @@ A really helpful resource for doing this project and creating smooth trajectorie
 ## Dependencies
 
 * cmake >= 3.5
+  
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
 * make >= 4.1
   * Linux: make is installed by default on most Linux distros
@@ -91,7 +98,7 @@ A really helpful resource for doing this project and creating smooth trajectorie
 ## Step of path planning
 
 ## overview ##
-	
+
 ![](https://i.imgur.com/tzEWA49.png)
 
 Layers involved in path planning — from Udacity
@@ -112,7 +119,7 @@ This is precisely what a Frenet coordinate system offers: in such a system we sp
 **Therefore, it is important for path planning to obtain the S and D values of future pah points.**
 
 **1. Analyze the data from the sensor fusion and categorize other vehicles by lane.**
- 
+
 		// find lane number of each car.
 		double findlane(double car_d) {
 		    int lane_number = -1;
@@ -173,16 +180,18 @@ This is precisely what a Frenet coordinate system offers: in such a system we sp
 		                                    }
 		
 		                                }
-		
-		
+
+
+​		
 		                            } else {
 		                                closest_leftback_dist = min(abs(dist),
 		                                                            closest_leftback_dist);// find the minimal distance to the closest rightback car
 		
 		                            }
-		
-		
-		
+
+
+​		
+​		
 		                        } else if (others_lane == my_lane + 1) {// in right lane
 		                            if( (car_s - 30 < fusion_s) && (car_s + 30 > fusion_s)){// safe traffic-gap (-30,30)
 		                                car_right= true;
@@ -247,7 +256,7 @@ I decided to assign costs for all these different functions:
 If lane in which we can turn doesn’t exist or closest car in side lane < buffer interval (car_right / car_left= true) then collision is likely hence cost increases to 500.
 
 If lane exists and safe to make the turn then -> cost = 0.5*250(turn_cost), otherwise -> cost = 250.
- 
+
 (Safest to make a turn defined as closest car front is about distance unit of 150 away and closest car back is a distance unit of 30 away.In this situation, lane emptyish in front. I decided these numbers by playing around in the simulator)
 
 
@@ -318,7 +327,7 @@ caluculate cost of each of the four actions at each moment and find the lowest c
         double speed_diff = 0; // speed difference for each step
         const double MAX_SPEED = 49.5; //mph
         const double MAX_ACC = .224; // how to calculate it?
-
+    
         if ((decision == 0) or (decision == -1)) { // continue
             lane = my_lane;
             if (ref_vel < MAX_SPEED) {// accelerate
@@ -333,7 +342,7 @@ caluculate cost of each of the four actions at each moment and find the lowest c
             lane = my_lane - 1;
         } else if (decision == 3) {// slow down
             lane = my_lane;
-
+    
             if (car_crash){ // Emergency collision avoidance
                 speed_diff -= MAX_ACC;
             }else{
@@ -343,7 +352,7 @@ caluculate cost of each of the four actions at each moment and find the lowest c
                     speed_diff -= 0.0;// if front car speed higher than my car, keep the car speed to follow the front car
                 }
             }
-
+    
         } else {
             cout << "Error" << endl;
         }
