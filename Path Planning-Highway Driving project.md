@@ -107,13 +107,13 @@
 
    1. Defining Process models: 使用过程模型的数学技术, 来模型化不同的动作, 比如车道变换和跟随驾驶等
 
-   <img src="/home/hyin/.config/Typora/typora-user-images/image-20200312151434669.png" alt="image-20200312151434669"  />
+   ![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318144621.png)
 
    ​																		过程模型
 
    我们需要用一些数学公式来表示这些模型：
 
-   ![image-20200312151740580](/home/hyin/.config/Typora/typora-user-images/image-20200312151740580.png)
+   ![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318144522.png)
 
    2. Using Process Models：过程模型首先用于比较目标车辆的观察行为和我们为每个演习创建的模型所期望的行为.  下面的图片有助于解释过程模型是如何用来计算这些可能性的. 
 
