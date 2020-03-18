@@ -125,7 +125,7 @@
 
    3. Classifying Intent with Multiple Model Algorithm: 使用多模估量器来处理维护预测伴随的不确定性, 也就是说在特定情况下, 目标将做何种动作的几率. 在本节顶部的图像中, 您可以看到一个条形图, 表示随着时间的推移各种集群的概率.  对于基于模型的方法, 多模型算法有着相似的用途: 它们负责维护每次机动概率的信念.  我们讨论的算法被称为自治多模型算法(AMM-Autonomous multiple model algorithm). 
 
-   ![](/home/hyin/.config/Typora/typora-user-images/image-20200312152521614.png)
+   ![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318234514.png)
 
    变量M代表过程模型数或者行为数, *μk*(*i*)代表某种行为的几率大小. 
 
@@ -306,11 +306,11 @@ def transition_function(predictions, current_fsm_state, current_pose, cost_funct
 
 另一个困难是如何去平衡各种目标量之间的冲突. 最后为不同的目标量定义不同的成本函数, 选择合适的成本参数. 
 
-![image-20200313132203357](/home/hyin/.config/Typora/typora-user-images/image-20200313132203357.png)
+![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318234158.png)
 
 下图是高速公路场景成本函数的实例, 在不同的场景下需要定义不同的成本函数. 
 
-![image-20200313132805683](/home/hyin/.config/Typora/typora-user-images/image-20200313132805683.png)
+![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318234216.png)
 
 在高速公路的情况中, 行为规划器将使用预测数据将自我车辆的状态设置为5个值中的一个, 并根据成本函数生成相应的车辆轨迹. 
 
@@ -334,9 +334,11 @@ def transition_function(predictions, current_fsm_state, current_pose, cost_funct
 
 这时无人车的可选项有两个，一是keep lane直到终点，二是先变道左侧，超过前车，再变道回目的车道，快速行驶至目的地。
 
-Intended_lane: 当前车道 + /-1, 如果车辆正在计划或执行车道变更. 
+Intended_lane: 当前车道 + /-1, 如果车辆正在计划或执行车道变化, 否则为当前车道.
 
-final_lane: 车辆在轨道末端的车道. 
+final_lane: 车辆最终到达的车道. 
+
+goal_lane：前方车辆所在的车道
 
 distance_to_goal: 车辆到目标的距离. 
 
@@ -401,7 +403,7 @@ double goal_distance_cost(int goal_lane, int intended_lane, int final_lane,
 
 作为一个总结, 在目前的实施情况下, 我们最终排序到9个候选轨迹, 并选择最符合我们的驾驶策略的一组加权成本函数定义. 
 
-![image-20200315115325276](/home/hyin/.config/Typora/typora-user-images/image-20200315115325276.png)
+![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318234308.png)
 
 ##### 轨迹生成器(Trajectory generation)
 
@@ -415,7 +417,7 @@ double goal_distance_cost(int goal_lane, int intended_lane, int final_lane,
 
 对于离散法, 常见的是A-star算法. A-star 算法是非结构化环境(停车场)中路径探索的最佳算法之一, 但是A-star 算法是离散的, 而机器人世界需要连续性. 因此我们基于运动学方程设计了混合A-Star, 从而使轨迹变得平滑. 
 
-![image-20200314205855006](/home/hyin/.config/Typora/typora-user-images/image-20200314205855006.png)
+![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318234342.png)
 
 <img src="https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200314205947.png" style="zoom:150%;" />
 
@@ -455,7 +457,7 @@ double goal_distance_cost(int goal_lane, int intended_lane, int final_lane,
 
 ![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200315113324.png)
 
-![image-20200315113404936](/home/hyin/.config/Typora/typora-user-images/image-20200315113404936.png)
+![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318234546.png)
 
 现在的关键点是正确地定义开始和结束条件. 
 
@@ -487,7 +489,7 @@ double goal_distance_cost(int goal_lane, int intended_lane, int final_lane,
 
 ![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200315113108.png)
 
-![image-20200315113226839](/home/hyin/.config/Typora/typora-user-images/image-20200315113226839.png)
+![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318234416.png)
 
 最小化JMT轨迹系数求解代码:
 
