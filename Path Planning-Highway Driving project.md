@@ -326,6 +326,10 @@ def transition_function(predictions, current_fsm_state, current_pose, cost_funct
 
 但真实的成本函数不单单只有1/0两个选项, 在这我们提出两个成本函数. 
 
+![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318143147.png)
+
+![](https://williamhyin-1301408646.cos.ap-shanghai.myqcloud.com/img/20200318143530.png)
+
 场景是假设无人车位于左下角，目的地是右下角的G点，无人车前方有一个车辆，但是速度非常慢；
 
 这时无人车的可选项有两个，一是keep lane直到终点，二是先变道左侧，超过前车，再变道回目的车道，快速行驶至目的地。
