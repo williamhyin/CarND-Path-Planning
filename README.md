@@ -5,8 +5,8 @@ Self-Driving Car Engineer Nanodegree Program Project
 
 If you want to learn more, please refer to my documentation:
 
-1. Path Planning-Highway Driving project.md
-2. Path Planning-search.md
+1. **[Path Planning-Highway Driving project.md](https://blog.csdn.net/williamhyin/article/details/105133783)**
+2. [**Path Planning-search.md**](https://blog.csdn.net/williamhyin/article/details/105133750)
 
 ### Goals
 
@@ -183,27 +183,27 @@ This is precisely what a Frenet coordinate system offers: in such a system we sp
 
 
 ​		
-		                            } else {
-		                                closest_leftback_dist = min(abs(dist),
-		                                                            closest_leftback_dist);// find the minimal distance to the closest rightback car
-		
+​		                            } else {
+​		                                closest_leftback_dist = min(abs(dist),
+​		                                                            closest_leftback_dist);// find the minimal distance to the closest rightback car
+​		
 		                            }
 
 
 ​		
 ​		
-		                        } else if (others_lane == my_lane + 1) {// in right lane
-		                            if( (car_s - 30 < fusion_s) && (car_s + 30 > fusion_s)){// safe traffic-gap (-30,30)
-		                                car_right= true;
-		                            }
-		                            if (dist > 0) {
-		                                if (dist<closest_rightfront_dist){
-		                                    closest_rightfront_dist=dist;
-		                                    if(dist<10){
-		                                        closest_right_d=fusion_d-car_d;// calculate the lateral distance between the two cars
-		                                    }
-		                                }
-		
+​		                        } else if (others_lane == my_lane + 1) {// in right lane
+​		                            if( (car_s - 30 < fusion_s) && (car_s + 30 > fusion_s)){// safe traffic-gap (-30,30)
+​		                                car_right= true;
+​		                            }
+​		                            if (dist > 0) {
+​		                                if (dist<closest_rightfront_dist){
+​		                                    closest_rightfront_dist=dist;
+​		                                    if(dist<10){
+​		                                        closest_right_d=fusion_d-car_d;// calculate the lateral distance between the two cars
+​		                                    }
+​		                                }
+​		
 		                            } else {
 		                                closest_rightback_dist = min(abs(dist),
 		                                                             closest_rightback_dist);// find the minimal distance to the closest leftback car
